@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    padding: 40px;
+  }
+  
+  h1, h2 {
+    margin-bottom: 20px;
+  }
+  
+  .dashboard {
+    max-width: 500px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .btn {
+    display: block;
+    background: #007bff;
+    color: #fff;
+    padding: 12px;
+    margin: 10px 0;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background: #0056b3;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .container {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+  }
+  
+
+  /* ---------- PRINT STYLES ---------- */
+@media print {
+
+    /* Hide buttons & navigation */
+    .no-print,
+    .btn,
+    a {
+      display: none !important;
+    }
+  
+    /* Remove background */
+    body {
+      background: white;
+    }
+  
+    /* Optional: improve print clarity */
+    table {
+      font-size: 14px;
+    }
+  
+  }
+/* ---------- END PRINT STYLES ---------- */  

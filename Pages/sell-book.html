@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sell Book</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Sell Book</h2>
+
+  <input id="sellName" placeholder="Book name">
+  <button class="btn" onclick="addToBill()">Add</button>
+
+  <table>
+    <thead>
+      <tr><th>Book</th><th>Qty</th><th>Total</th></tr>
+    </thead>
+    <tbody id="bill"></tbody>
+  </table>
+
+  <h3>Total: ₹ <span id="total">0</span></h3>
+  <button class="btn" onclick="completeSale()">Complete Sale</button>
+
+  <a href="../index.html">⬅ Back</a>
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/billing.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bill | Bookstall CRM</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="bill-container">
+    <h2>📚 Chinmaya_Vani_CRM_Portal</h2>
+    <p>Invoice No: <span id="invoiceNo"></span></p>
+    <p>Date: <span id="billDate"></span></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Book</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="billItems">
+        <!-- Bill items -->
+      </tbody>
+    </table>
+
+    <h3>Grand Total: ₹ <span id="billTotal"></span></h3>
+
+    <div class="no-print">
+        <button class="btn" onclick="printAndGoBack()">🖨️ Print</button>
+        <button class="btn" onclick="goBack()">⬅ Back to Dashboard</button>
+      </div>
+      
+
+
+  </div>
+
+</body>
+</html>
+
+<script src="../js/storage.js"></script>
+<script>
+
+    function goBack() {
+        window.location.href = "../index.html";
+      }
+      
+  const invoiceNo = localStorage.getItem("currentInvoice");
+
+  if (!invoiceNo) {
+    alert("No invoice found");
+  }
+
+  const bill = getBillByInvoice(invoiceNo);
+
+  if (!bill) {
+    alert("Bill not found");
+  }
+
+  document.getElementById("invoiceNo").innerText = bill.invoiceNo;
+  document.getElementById("billDate").innerText = bill.date;
+  document.getElementById("billTotal").innerText = bill.grandTotal;
+
+  const tbody = document.getElementById("billItems");
+
+  bill.items.forEach(item => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.quantity}</td>
+      <td>₹${item.price}</td>
+      <td>₹${item.total}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  function printAndGoBack() {
+    window.print();
+  }
+
+  window.onafterprint = () => window.history.back();
+</script>
