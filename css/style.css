@@ -52,14 +52,20 @@ body {
   }
   
   .container {
-    max-width: 700px;
+    max-width: 600px;
     margin: auto;
     background: #fff;
-    padding: 25px;
+    padding: 100px;
     border-radius: 10px;
   }
   
-
+  .bill-container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 100px;
+    border-radius: 10px;
+  }
   /* ---------- PRINT STYLES ---------- */
 @media print {
 
@@ -82,3 +88,23 @@ body {
   
   }
 /* ---------- END PRINT STYLES ---------- */  
+
+/* ---------- PAYMENT MODAL ---------- */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+  }
+  

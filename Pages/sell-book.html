@@ -10,19 +10,39 @@
   <h2>Sell Book</h2>
 
   <input id="sellName" placeholder="Book name">
+  <input id="sellQty" type="number" min="1" value="1" placeholder="Qty">
   <button class="btn" onclick="addToBill()">Add</button>
+  
 
   <table>
     <thead>
-      <tr><th>Book</th><th>Qty</th><th>Total</th></tr>
+      <tr>
+        <th>Book</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
     </thead>
     <tbody id="bill"></tbody>
   </table>
 
   <h3>Total: ₹ <span id="total">0</span></h3>
-  <button class="btn" onclick="completeSale()">Complete Sale</button>
 
+  <button class="btn" onclick="completeSale()">Complete Sale</button>
+  <br><br>
   <a href="../index.html">⬅ Back</a>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal" style="display:none">
+  <div class="modal-content">
+    <h3>Select Payment</h3>
+
+    <label><input type="radio" name="payment" value="Cash" checked> Cash</label><br>
+    <label><input type="radio" name="payment" value="Online"> Online</label><br><br>
+
+    <button class="btn" onclick="confirmPayment()">Confirm</button>
+  </div>
 </div>
 
 <script src="../js/storage.js"></script>

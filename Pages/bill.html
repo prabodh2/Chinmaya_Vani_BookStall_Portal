@@ -1,84 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Bill | Bookstall CRM</title>
+  <title>Bill</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-  <div class="bill-container">
-    <h2>📚 Chinmaya_Vani_CRM_Portal</h2>
-    <p>Invoice No: <span id="invoiceNo"></span></p>
-    <p>Date: <span id="billDate"></span></p>
+<div class="bill-container">
+  <h2 >📚 CHINMAYA_VANI</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Book</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody id="billItems">
-        <!-- Bill items -->
-      </tbody>
-    </table>
+  <p>Invoice: <span id="invoiceNo"></span></p>
+  <p>Date: <span id="billDate"></span></p>
 
-    <h3>Grand Total: ₹ <span id="billTotal"></span></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="billItems"></tbody>
+  </table>
 
-    <div class="no-print">
-        <button class="btn" onclick="printAndGoBack()">🖨️ Print</button>
-        <button class="btn" onclick="goBack()">⬅ Back to Dashboard</button>
-      </div>
-      
+  <h3>Grand Total: ₹ <span id="billTotal"></span></h3>
 
-
+  <div class="no-print">
+    <button class="btn" onclick="window.print()">🖨️ Print</button>
+    <button class="btn" onclick="sendWhatsApp()">📲 WhatsApp</button>
+    <button class="btn" onclick="goBack()">⬅ Back</button>
   </div>
-
-</body>
-</html>
+</div>
 
 <script src="../js/storage.js"></script>
 <script>
-
-    function goBack() {
-        window.location.href = "../index.html";
-      }
-      
   const invoiceNo = localStorage.getItem("currentInvoice");
-
-  if (!invoiceNo) {
-    alert("No invoice found");
-  }
-
   const bill = getBillByInvoice(invoiceNo);
 
-  if (!bill) {
-    alert("Bill not found");
-  }
-
-  document.getElementById("invoiceNo").innerText = bill.invoiceNo;
+  invoiceNo && (document.getElementById("invoiceNo").innerText = bill.invoiceNo);
   document.getElementById("billDate").innerText = bill.date;
   document.getElementById("billTotal").innerText = bill.grandTotal;
 
   const tbody = document.getElementById("billItems");
 
-  bill.items.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${item.name}</td>
-      <td>${item.quantity}</td>
-      <td>₹${item.price}</td>
-      <td>₹${item.total}</td>
+  bill.items.forEach(i => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${i.name}</td>
+        <td>${i.quantity}</td>
+        <td>₹${i.price}</td>
+        <td>₹${i.total}</td>
+      </tr>
     `;
-    tbody.appendChild(row);
   });
 
-  function printAndGoBack() {
-    window.print();
+  function goBack() {
+    window.location.href = "../index.html";
   }
 
-  window.onafterprint = () => window.history.back();
+  function sendWhatsApp() {
+    let msg = `📚 CHINMAYA_VANI\n\nInvoice:  ${bill.invoiceNo}\nDate: ${bill.date}\n\n`;
+    bill.items.forEach(i => {
+      msg += `${i.name} x ${i.quantity} = ₹${i.total}\n`;
+    });
+    msg += `\nTotal: ₹${bill.grandTotal}\nPayment: ${bill.paymentMode}`;
+
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(msg)}`,
+      "_blank"
+    );
+  }
 </script>
+
+<style>
+@media print {
+  .no-print { display: none; }
+}
+</style>
+
+</body>
+</html>
